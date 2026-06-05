@@ -310,53 +310,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const layerMap = {};
   let activeId = null;
 
-  function joinRings(segments) {
-    const polys = [], used = new Set();
-    segments.forEach((seg, i) => {
-      if (used.has(i)) return;
-      used.add(i);
-      let ring = [...seg], changed = true;
-      while (changed) {
-        changed = false;
-        segments.forEach((s, j) => {
-          if (used.has(j)) return;
-          const re = ring[ring.length - 1];
-          if (s[0][0] === re[0] && s[0][1] === re[1]) {
-            ring = ring.concat(s.slice(1)); used.add(j); changed = true;
-          } else if (s[s.length-1][0] === re[0] && s[s.length-1][1] === re[1]) {
-            ring = ring.concat([...s].reverse().slice(1)); used.add(j); changed = true;
-          }
-        });
-      }
-      if (ring[0][0] !== ring[ring.length-1][0] || ring[0][1] !== ring[ring.length-1][1]) ring.push(ring[0]);
-      if (ring.length >= 4) polys.push(ring);
-    });
-    return polys;
-  }
-
-  function elementToFeature(el) {
-    if (el.type !== 'relation') return null;
-    const rings = { outer: [], inner: [] };
-    (el.members || []).forEach(m => {
-      if (m.type === 'way' && m.geometry?.length > 1) {
-        const coords = m.geometry.map(p => [p.lon, p.lat]);
-        rings[m.role === 'inner' ? 'inner' : 'outer'].push(coords);
-      }
-    });
-    if (!rings.outer.length) return null;
-    const outerPolys = joinRings(rings.outer);
-    const innerPolys = joinRings(rings.inner);
-    if (!outerPolys.length) return null;
-    const coords = outerPolys.map(outer => [outer, ...innerPolys]);
-    return {
-      type: 'Feature',
-      properties: { ...el.tags, osm_id: el.id },
-      geometry: coords.length === 1
-        ? { type: 'Polygon',      coordinates: coords[0] }
-        : { type: 'MultiPolygon', coordinates: coords.map(c => [c]) },
-    };
-  }
-
   function setActive(osmId) {
     // Reset old
     if (activeId && layerMap[activeId]) {
@@ -399,25 +352,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  const OVERPASS_ENDPOINTS = [
-    'https://overpass-api.de/api/interpreter',
-    'https://overpass.kumi.systems/api/interpreter',
-    'https://maps.mail.ru/osm/tools/overpass/api/interpreter',
-  ];
-
-  async function overpassFetch(body) {
-    for (const endpoint of OVERPASS_ENDPOINTS) {
-      try {
-        const res = await fetch(endpoint, { method: 'POST', body });
-        if (!res.ok) continue;
-        const text = await res.text();
-        if (text.trim().startsWith('<')) continue; // HTML error page
-        return JSON.parse(text);
-      } catch (e) { /* try next */ }
-    }
-    throw new Error('All Overpass endpoints failed or rate-limited');
-  }
-
   function renderFromGeoJSON(geojson) {
     geojson.features.forEach(feature => {
       const rawId = feature.properties.osm_id;
@@ -459,35 +393,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Single fetch — local file first, then live Overpass
   async function loadAllBoundaries() {
-    let elements = null;
-
-    // Try pre-fetched local GeoJSON first
     try {
       const res = await fetch('./neighborhoods.geojson');
-      if (res.ok) {
-        const geojson = await res.json();
-        if (geojson.features?.length) {
-          renderFromGeoJSON(geojson);
-          return;
-        }
-      }
-    } catch (e) { /* fall through to live API */ }
-
-    // Live Overpass fallback
-    const rels = allIds.map(id => `relation(${id});`).join('\n');
-    const body = `[out:json][timeout:60];\n(\n${rels}\n);\nout geom;`;
-    let data;
-    try {
-      data = await overpassFetch(body);
+      if (!res.ok) return;
+      const geojson = await res.json();
+      if (geojson.features?.length) renderFromGeoJSON(geojson);
     } catch (e) {
-      console.warn('Overpass fetch failed', e);
-      return;
+      console.warn('Could not load neighborhoods.geojson', e);
     }
-
-    const features = (data.elements || []).map(elementToFeature).filter(Boolean);
-    renderFromGeoJSON({ type: 'FeatureCollection', features });
   }
 
   loadAllBoundaries();
