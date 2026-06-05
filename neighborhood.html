@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neighborhood Guide — Lovejoy Real Estate</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="neighborhood.css">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <a href="mailto:clientcare@lovejoyrealestate.com">
+        <i class="fas fa-envelope"></i> clientcare@lovejoyrealestate.com
+      </a>
+    </div>
+    <div class="top-bar-right">
+      <a href="tel:5035012490"><i class="fas fa-phone"></i> 503-501-2490</a>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-tiktok"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Header (sticky) -->
+  <header class="main-header main-header--sticky">
+    <div class="logo">
+      <a href="index.html">
+        <svg class="logo-globe" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="48" height="48">
+          <defs><clipPath id="globe-clip"><circle cx="50" cy="50" r="43"/></clipPath></defs>
+          <g clip-path="url(#globe-clip)">
+            <line x1="33" y1="0" x2="33" y2="100" stroke="#4a8fa8" stroke-width="4"/>
+            <line x1="67" y1="0" x2="67" y2="100" stroke="#4a8fa8" stroke-width="4"/>
+            <line x1="0" y1="50" x2="100" y2="50" stroke="#4a8fa8" stroke-width="4"/>
+          </g>
+          <circle cx="50" cy="50" r="43" fill="none" stroke="#4a8fa8" stroke-width="4.5"/>
+        </svg>
+        <div class="logo-text">
+          <span class="logo-name">LOVEJOY</span>
+          <span class="logo-sub">REAL ESTATE</span>
+        </div>
+      </a>
+    </div>
+
+    <nav class="main-nav" id="main-nav">
+      <ul>
+        <li class="has-dropdown">
+          <a href="#">WHO WE ARE <i class="fas fa-chevron-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our Team</a></li>
+            <li><a href="#">Testimonials</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="#">BUY <i class="fas fa-chevron-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="#">Search Homes</a></li>
+            <li><a href="#">Buyer's Guide</a></li>
+          </ul>
+        </li>
+        <li class="has-dropdown">
+          <a href="#">SELL <i class="fas fa-chevron-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="#">Home Valuation</a></li>
+            <li><a href="#">Seller's Guide</a></li>
+          </ul>
+        </li>
+        <li><a href="index.html#section-neighborhoods">NEIGHBORHOODS</a></li>
+        <li><a href="#">BLOG</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#" data-modal="contact">CONTACT US</a></li>
+      </ul>
+    </nav>
+
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- HERO                                       -->
+  <!-- ══════════════════════════════════════════ -->
+  <section class="nbhd-hero">
+    <div class="nbhd-hero-inner">
+      <div class="nbhd-hero-text">
+        <p class="nbhd-hero-eyebrow" id="h-city">Northeast Portland</p>
+        <h1 class="nbhd-hero-title" id="h-name">Irvington</h1>
+        <p class="nbhd-hero-tagline" id="h-tagline">One of inner NE's most consistently sought-after neighborhoods — Craftsman homes, strong schools, and deep-rooted demand.</p>
+        <div class="nbhd-hero-actions">
+          <a href="#listings" class="btn-primary">View Active Listings</a>
+          <a href="#" class="btn-outline" data-modal="contact">Talk to an Agent</a>
+        </div>
+      </div>
+      <div class="nbhd-hero-map" id="nbhd-hero-map"></div>
+      <br>
+    </div>
+  </section>
+  
+  <!-- ══════════════════════════════════════════ -->
+  <!-- SCORES BAR                                 -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="scores-bar">
+    <div class="scores-inner">
+      <div class="score-item">
+        <div class="score-circle" id="sc-walk" data-score="85" data-color="#296886">85</div>
+        <div class="score-meta">
+          <strong>Walk Score</strong>
+          <span id="sc-walk-label">Very Walkable</span>
+        </div>
+      </div>
+      <div class="score-divider"></div>
+      <div class="score-item">
+        <div class="score-circle" id="sc-bike" data-score="92" data-color="#296886">92</div>
+        <div class="score-meta">
+          <strong>Bike Score</strong>
+          <span id="sc-bike-label">Biker's Paradise</span>
+        </div>
+      </div>
+      <div class="score-divider"></div>
+      <div class="score-item">
+        <div class="score-circle" id="sc-transit" data-score="67" data-color="#296886">67</div>
+        <div class="score-meta">
+          <strong>Transit Score</strong>
+          <span id="sc-transit-label">Excellent Transit</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- MAIN CONTENT GRID                          -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="nbhd-grid">
+
+    <!-- LEFT: About → Schools → AI -->
+    <div class="nbhd-grid-left">
+
+      <section class="nbhd-card" id="about">
+        <h2 class="nbhd-card-title">About<span id="desc-name">Irvington</span></h2>
+        <div class="nbhd-description" id="h-description">
+          <p>Irvington is one of Portland's most architecturally rich inner-NE neighborhoods. Named for Washington Irving, the area developed in the early 20th century and has retained much of its original character — wide streets, mature tree canopy, and a dense collection of Craftsman bungalows, Colonial Revivals, and Foursquares.</p>
+          <p>Demand here has been consistent for decades. Buyers don't come to Irvington looking for a deal — they come because of what it is: walkable, established, and close to everything inner NE has to offer without the density of the Pearl or the noise of Alberta. The schools, the park, and the housing stock keep it competitive.</p>
+          <p>Inventory is typically tight. When a well-maintained home hits the market here, it moves quickly.</p>
+        </div>
+      </section>
+
+      <!-- Schools — full width -->
+      <section class="nbhd-card" id="schools">
+        <h2 class="nbhd-card-title">Schools</h2>
+        <div class="schools-list" id="schools-list">
+          <div class="school-item">
+            <div class="school-icon"><i class="fas fa-school"></i></div>
+            <div class="school-info">
+              <strong>Irvington Elementary</strong>
+              <span>K–5 · Portland Public Schools</span>
+            </div>
+            <div class="school-rating school-rating--high">8/10</div>
+          </div>
+          <div class="school-item">
+            <div class="school-icon"><i class="fas fa-school"></i></div>
+            <div class="school-info">
+              <strong>Harriet Tubman Middle School</strong>
+              <span>6–8 · Portland Public Schools</span>
+            </div>
+            <div class="school-rating school-rating--mid">6/10</div>
+          </div>
+          <div class="school-item">
+            <div class="school-icon school-icon--high"><i class="fas fa-graduation-cap"></i></div>
+            <div class="school-info">
+              <strong>Grant High School</strong>
+              <span>9–12 · Portland Public Schools</span>
+            </div>
+            <div class="school-rating school-rating--high">7/10</div>
+          </div>
+        </div>
+        <div class="district-badge">
+          <i class="fas fa-building-columns"></i>
+          <span>Portland Public Schools District</span>
+        </div>
+      </section>
+
+      <!-- Local Amenities -->
+      <section class="nbhd-card" id="amenities">
+        <h2 class="nbhd-card-title">Local Amenities</h2>
+        <div class="amenities-grid" id="amenities-grid">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+
+    </div>
+
+    <!-- RIGHT: Photos → Market Stats → Nearby -->
+    <div class="nbhd-grid-right">
+
+      <!-- Community Photo Carousel -->
+      <div class="photo-carousel nbhd-card" id="photo-carousel">
+        <div class="photo-carousel-track" id="photo-carousel-track">
+          <!-- Slides injected by JS from NEIGHBORHOODS.photos -->
+          <div class="photo-slide photo-slide--placeholder">
+            <i class="fas fa-image"></i>
+            <span>Add photos via <code>NEIGHBORHOODS["Irvington"].photos</code></span>
+          </div>
+        </div>
+        <div class="photo-carousel-dots" id="photo-carousel-dots"></div>
+        <button class="photo-carousel-prev" id="photo-prev"><i class="fas fa-chevron-left"></i></button>
+        <button class="photo-carousel-next" id="photo-next"><i class="fas fa-chevron-right"></i></button>
+      </div>
+
+      <section class="nbhd-card nbhd-card--stats" id="market">
+        <h2 class="nbhd-card-title">Real Estate Market</h2>
+        <div class="market-updated" id="market-updated">Updated June 2, 2026 · Source: RMLS</div>
+
+        <div class="market-section">
+          <div class="market-section-label">RECENT SALES · LAST 12 MONTHS</div>
+          <div class="market-row"><span>Homes sold</span><span class="market-val bold" id="ms-sold">340</span></div>
+          <div class="market-row"><span>Sold range</span><span class="market-val bold" id="ms-range">$227K – $1.10M</span></div>
+          <div class="market-row"><span>Median sale price</span><span class="market-val bold" id="ms-median">$525,000</span></div>
+          <div class="market-row"><span>Median $/sqft</span><span class="market-val bold" id="ms-ppsf">$322</span></div>
+          <div class="market-row"><span>Median days on market</span><span class="market-val bold" id="ms-dom">19 days</span></div>
+          <div class="market-row"><span>Sold-to-list ratio</span><span class="market-val bold" id="ms-stl">100.0%</span></div>
+        </div>
+
+        <div class="market-divider"></div>
+
+        <div class="market-section">
+          <div class="market-section-label">VS. A YEAR AGO</div>
+          <div class="market-row"><span>Median sale</span><span class="market-val trend-down" id="ms-yoy-median">▼ 0.9%</span></div>
+          <div class="market-row"><span>$/sqft</span><span class="market-val trend-down" id="ms-yoy-ppsf">▼ 2.3%</span></div>
+          <div class="market-row"><span>Days on market</span><span class="market-val trend-up" id="ms-yoy-dom">▲ 35.7%</span></div>
+        </div>
+
+        <div class="market-divider"></div>
+
+        <div class="market-section">
+          <div class="market-section-label">CURRENTLY ACTIVE</div>
+          <div class="market-row"><span>Active listings</span><span class="market-val bold" id="ms-active">86</span></div>
+          <div class="market-row"><span>Median list price</span><span class="market-val bold" id="ms-list">$499,000</span></div>
+          <div class="market-row"><span>With price reduction</span><span class="market-val" id="ms-reduced">51%</span></div>
+          <div class="market-row"><span>Median reduction</span><span class="market-val bold" id="ms-reduction">6.7% off original</span></div>
+        </div>
+
+        <a href="#" class="market-cta">Get a free home valuation <i class="fas fa-arrow-right"></i></a>
+      </section>
+
+      <!-- Nearby Neighborhoods — right column -->
+      <section class="nbhd-card" id="nearby">
+        <h2 class="nbhd-card-title">Nearby Neighborhoods</h2>
+        <div class="nearby-chips" id="nearby-chips">
+          <a href="?n=Alameda" class="nearby-chip">Alameda</a>
+          <a href="?n=Beaumont-Wilshire" class="nearby-chip">Beaumont-Wilshire</a>
+          <a href="?n=Sabin" class="nearby-chip">Sabin</a>
+          <a href="?n=Hollywood" class="nearby-chip">Hollywood</a>
+          <a href="?n=Sullivan's Gulch" class="nearby-chip">Sullivan's Gulch</a>
+          <a href="?n=Lloyd District" class="nearby-chip">Lloyd District</a>
+          <a href="?n=Grant Park" class="nearby-chip">Grant Park</a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+  <!-- ══════════════════════════════════════════ -->
+  <!-- TRANSITION BAND                            -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="listings-transition">
+    <div class="listings-transition-inner">
+      <div class="listings-transition-line"></div>
+      <div class="listings-transition-label">
+        <i class="fas fa-key"></i>
+        <span>Homes For Sale</span>
+      </div>
+      <div class="listings-transition-line"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- LISTINGS CAROUSEL                          -->
+  <!-- ══════════════════════════════════════════ -->
+  <section class="listings-section" id="listings">
+    <div class="listings-inner">
+      <div class="listings-header">
+        <div>
+          <h2>Active Listings in <span id="listings-name">Irvington</span></h2>
+          <p class="listings-sub">Pulled from RMLS · Updated daily</p>
+        </div>
+        <a href="#" class="btn-outline listings-all">Get the App to View All <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="carousel-wrap">
+        <button class="carousel-btn carousel-btn--prev" id="carousel-prev" aria-label="Previous listings">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="listings-carousel" id="listings-grid">
+          <div class="listing-card">
+            <div class="listing-img listing-img--1"><span class="listing-badge">Active</span></div>
+            <div class="listing-body">
+              <div class="listing-price">$549,000</div>
+              <div class="listing-addr">1847 NE Brazee St, Portland OR 97212</div>
+              <div class="listing-meta">
+                <span><i class="fas fa-bed"></i> 3 bd</span>
+                <span><i class="fas fa-bath"></i> 2 ba</span>
+                <span><i class="fas fa-ruler-combined"></i> 1,640 sqft</span>
+              </div>
+              <div class="listing-ppsf">$335/sqft · Listed 4 days ago</div>
+            </div>
+          </div>
+          <div class="listing-card">
+            <div class="listing-img listing-img--2"><span class="listing-badge">Active</span></div>
+            <div class="listing-body">
+              <div class="listing-price">$724,000</div>
+              <div class="listing-addr">2204 NE Thompson St, Portland OR 97212</div>
+              <div class="listing-meta">
+                <span><i class="fas fa-bed"></i> 4 bd</span>
+                <span><i class="fas fa-bath"></i> 3 ba</span>
+                <span><i class="fas fa-ruler-combined"></i> 2,210 sqft</span>
+              </div>
+              <div class="listing-ppsf">$328/sqft · Listed 8 days ago</div>
+            </div>
+          </div>
+          <div class="listing-card">
+            <div class="listing-img listing-img--3"><span class="listing-badge listing-badge--reduced">Price Reduced</span></div>
+            <div class="listing-body">
+              <div class="listing-price">$489,000 <span class="listing-was">$519,000</span></div>
+              <div class="listing-addr">3012 NE Knott St, Portland OR 97212</div>
+              <div class="listing-meta">
+                <span><i class="fas fa-bed"></i> 3 bd</span>
+                <span><i class="fas fa-bath"></i> 1 ba</span>
+                <span><i class="fas fa-ruler-combined"></i> 1,320 sqft</span>
+              </div>
+              <div class="listing-ppsf">$371/sqft · Listed 22 days ago</div>
+            </div>
+          </div>
+          <div class="listing-card">
+            <div class="listing-img listing-img--1"><span class="listing-badge listing-badge--pending">Pending</span></div>
+            <div class="listing-body">
+              <div class="listing-price">$612,500</div>
+              <div class="listing-addr">1504 NE Stanton St, Portland OR 97212</div>
+              <div class="listing-meta">
+                <span><i class="fas fa-bed"></i> 3 bd</span>
+                <span><i class="fas fa-bath"></i> 2 ba</span>
+                <span><i class="fas fa-ruler-combined"></i> 1,880 sqft</span>
+              </div>
+              <div class="listing-ppsf">$326/sqft · Listed 6 days ago</div>
+            </div>
+          </div>
+          <div class="listing-card">
+            <div class="listing-img listing-img--2"><span class="listing-badge">Active</span></div>
+            <div class="listing-body">
+              <div class="listing-price">$895,000</div>
+              <div class="listing-addr">2815 NE Hancock St, Portland OR 97212</div>
+              <div class="listing-meta">
+                <span><i class="fas fa-bed"></i> 5 bd</span>
+                <span><i class="fas fa-bath"></i> 3 ba</span>
+                <span><i class="fas fa-ruler-combined"></i> 2,940 sqft</span>
+              </div>
+              <div class="listing-ppsf">$304/sqft · Listed 11 days ago</div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-btn carousel-btn--next" id="carousel-next" aria-label="Next listings">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+      <div class="carousel-dots" id="carousel-dots"></div>
+    </div>
+  </section>
+
+  <!-- Contact Modal (same as index.html) -->
+  <div class="modal-backdrop" id="contact-modal" role="dialog" aria-modal="true">
+    <div class="modal">
+      <button class="modal-close" id="modal-close"><i class="fas fa-times"></i></button>
+      <div class="modal-left">
+        <p class="modal-eyebrow">Get in Touch</p>
+        <h2>Let's talk about<br><span id="modal-nbhd-name">Irvington</span>.</h2>
+        <p class="modal-aside">No pressure, no pitch. Whether you're ready now or just starting to explore — the earlier we connect, the more useful we can be.</p>
+      </div>
+      <div class="modal-right">
+        <form class="modal-form" id="contact-form" novalidate>
+          <div class="modal-row">
+            <div class="modal-field"><label>First Name</label><input type="text" placeholder="Jane" required></div>
+            <div class="modal-field"><label>Last Name</label><input type="text" placeholder="Smith" required></div>
+          </div>
+          <div class="modal-field"><label>Email</label><input type="email" placeholder="jane@email.com" required></div>
+          <div class="modal-field"><label>Phone</label><input type="tel" placeholder="503-555-0100"></div>
+          <div class="modal-field">
+            <label>I'm interested in…</label>
+            <select><option value="">Select one</option><option>Buying in this neighborhood</option><option>Selling in this neighborhood</option><option>Just exploring</option></select>
+          </div>
+          <div class="modal-field"><label>Message <span class="modal-optional">(optional)</span></label><textarea rows="3" placeholder="Tell us about your situation…"></textarea></div>
+          <div class="modal-legal-disclosure">By providing Lovejoy Real Estate your contact information, you acknowledge and agree to our <a href="#">Privacy Policy</a> and consent to receiving marketing communications, including through automated calls, texts, and emails. Message and data rates may apply.</div>
+          <div class="modal-checkboxes">
+            <label class="modal-checkbox-label"><input type="checkbox" name="sms_transactional"><span>I allow Lovejoy Real Estate to send me transactional/informational SMS. Reply STOP to opt out.</span></label>
+            <label class="modal-checkbox-label"><input type="checkbox" name="sms_marketing"><span>I allow promotional SMS from Lovejoy Real Estate. Reply STOP to opt out.</span></label>
+            <label class="modal-checkbox-label"><input type="checkbox" name="terms" required><span>I accept the <a href="#">Terms of Service</a> &amp; <a href="#">Privacy Policy</a>. <span class="modal-required-mark">*</span></span></label>
+          </div>
+          <button type="submit" class="btn-primary modal-submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom CTA -->
+  <section class="nbhd-cta-section">
+    <div class="nbhd-cta-inner">
+      <div class="nbhd-cta-text">
+        <p class="nbhd-cta-eyebrow">Ready to make a move?</p>
+        <h2 id="cta-headline">Thinking about buying or selling in <span id="cta-nbhd-name">Irvington</span>?</h2>
+        <p class="nbhd-cta-sub">No pressure, no pitch. We know this neighborhood — the streets, the schools, the market. Reach out before you're ready and we'll tell you exactly what we see.</p>
+      </div>
+      <div class="nbhd-cta-actions">
+        <a href="#" class="btn-primary" data-modal="contact">Talk to an Agent</a>
+        <a href="#listings" class="btn-outline-light">View Active Listings</a>
+        <a href="index.html#section-neighborhoods" class="btn-outline-light">Explore Other Neighborhoods</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pearl floating chatbot -->
+  <div class="pearl-widget" id="pearl-widget">
+
+    <!-- Expanded chat window -->
+    <div class="pearl-window" id="pearl-window" aria-hidden="true">
+      <div class="pearl-window-header">
+        <div class="pearl-window-title">
+          <div class="pearl-avatar-sm">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="pg2" cx="38%" cy="32%" r="65%">
+                  <stop offset="0%" stop-color="#7fc8e0"/>
+                  <stop offset="55%" stop-color="#296886"/>
+                  <stop offset="100%" stop-color="#1a3f52"/>
+                </radialGradient>
+              </defs>
+              <circle cx="20" cy="20" r="19" fill="url(#pg2)"/>
+              <ellipse cx="13" cy="16" rx="2.2" ry="2.5" fill="white" opacity="0.9"/>
+              <ellipse cx="27" cy="16" rx="2.2" ry="2.5" fill="white" opacity="0.9"/>
+              <path d="M14 25 Q20 30 26 25" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.9"/>
+              <circle cx="32" cy="8" r="2.5" fill="white" opacity="0.85"/>
+              <line x1="32" y1="4" x2="32" y2="6" stroke="white" stroke-width="1.2" opacity="0.7"/>
+              <line x1="32" y1="10" x2="32" y2="12" stroke="white" stroke-width="1.2" opacity="0.7"/>
+              <line x1="28" y1="8" x2="30" y2="8" stroke="white" stroke-width="1.2" opacity="0.7"/>
+              <line x1="34" y1="8" x2="36" y2="8" stroke="white" stroke-width="1.2" opacity="0.7"/>
+            </svg>
+          </div>
+          <div>
+            <strong>Pearl</strong>
+            <span>AI Neighborhood Guide</span>
+          </div>
+        </div>
+        <button class="pearl-close" id="pearl-close" aria-label="Close Pearl">×</button>
+      </div>
+      <div class="pearl-messages" id="pearl-messages">
+        <div class="pearl-msg pearl-msg--pearl">
+          <div class="pearl-bubble">Hi! I'm Pearl 🪮 — I know <span class="pearl-nbhd-name">Irvington</span> well. Ask me about schools, commute times, what's nearby, or what the market's been doing.</div>
+        </div>
+      </div>
+      <div class="pearl-input-row">
+        <input type="text" id="pearl-input" class="pearl-input" placeholder="Ask me anything about this neighborhood…">
+        <button class="pearl-send" id="pearl-send"><i class="fas fa-arrow-up"></i></button>
+      </div>
+      <p class="pearl-disclaimer">AI-generated · Always verify with your agent</p>
+    </div>
+
+    <!-- Trigger button -->
+    <button class="pearl-trigger" id="pearl-trigger" aria-label="Chat with Pearl">
+      <svg class="pearl-logo" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="pearlGrad" cx="38%" cy="32%" r="65%">
+            <stop offset="0%" stop-color="#7fc8e0"/>
+            <stop offset="55%" stop-color="#296886"/>
+            <stop offset="100%" stop-color="#1a3f52"/>
+          </radialGradient>
+          <radialGradient id="sheen" cx="30%" cy="28%" r="40%">
+            <stop offset="0%" stop-color="white" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="white" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <!-- Pearl body -->
+        <circle cx="28" cy="28" r="26" fill="url(#pearlGrad)"/>
+        <!-- Sheen -->
+        <ellipse cx="22" cy="20" rx="10" ry="7" fill="url(#sheen)"/>
+        <!-- Eyes -->
+        <ellipse cx="21" cy="24" rx="3" ry="3.5" fill="white" opacity="0.92"/>
+        <ellipse cx="35" cy="24" rx="3" ry="3.5" fill="white" opacity="0.92"/>
+        <!-- Smile -->
+        <path d="M20 33 Q28 40 36 33" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.92"/>
+        <!-- Sparkle top-right -->
+        <circle cx="44" cy="12" r="3" fill="white" opacity="0.9"/>
+        <line x1="44" y1="6"  x2="44" y2="9"  stroke="white" stroke-width="1.5" opacity="0.8"/>
+        <line x1="44" y1="15" x2="44" y2="18" stroke="white" stroke-width="1.5" opacity="0.8"/>
+        <line x1="38" y1="12" x2="41" y2="12" stroke="white" stroke-width="1.5" opacity="0.8"/>
+        <line x1="47" y1="12" x2="50" y2="12" stroke="white" stroke-width="1.5" opacity="0.8"/>
+        <line x1="40" y1="8"  x2="42" y2="10" stroke="white" stroke-width="1.2" opacity="0.6"/>
+        <line x1="46" y1="14" x2="48" y2="16" stroke="white" stroke-width="1.2" opacity="0.6"/>
+      </svg>
+      <span class="pearl-label">Ask Pearl</span>
+    </button>
+
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js"></script>
+  <script src="neighborhood.js"></script>
+</body>
+</html>
