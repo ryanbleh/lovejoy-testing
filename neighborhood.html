@@ -147,11 +147,9 @@
     <div class="nbhd-grid-left">
 
       <section class="nbhd-card" id="about">
-        <h2 class="nbhd-card-title">About<span id="desc-name">Irvington</span></h2>
+        <h2 class="nbhd-card-title">About <span id="desc-name"></span></h2>
         <div class="nbhd-description" id="h-description">
-          <p>Irvington is one of Portland's most architecturally rich inner-NE neighborhoods. Named for Washington Irving, the area developed in the early 20th century and has retained much of its original character — wide streets, mature tree canopy, and a dense collection of Craftsman bungalows, Colonial Revivals, and Foursquares.</p>
-          <p>Demand here has been consistent for decades. Buyers don't come to Irvington looking for a deal — they come because of what it is: walkable, established, and close to everything inner NE has to offer without the density of the Pearl or the noise of Alberta. The schools, the park, and the housing stock keep it competitive.</p>
-          <p>Inventory is typically tight. When a well-maintained home hits the market here, it moves quickly.</p>
+          <!-- Populated by JS from NEIGHBORHOODS[name].description -->
         </div>
       </section>
 
@@ -159,34 +157,11 @@
       <section class="nbhd-card" id="schools">
         <h2 class="nbhd-card-title">Schools</h2>
         <div class="schools-list" id="schools-list">
-          <div class="school-item">
-            <div class="school-icon"><i class="fas fa-school"></i></div>
-            <div class="school-info">
-              <strong>Irvington Elementary</strong>
-              <span>K–5 · Portland Public Schools</span>
-            </div>
-            <div class="school-rating school-rating--high">8/10</div>
-          </div>
-          <div class="school-item">
-            <div class="school-icon"><i class="fas fa-school"></i></div>
-            <div class="school-info">
-              <strong>Harriet Tubman Middle School</strong>
-              <span>6–8 · Portland Public Schools</span>
-            </div>
-            <div class="school-rating school-rating--mid">6/10</div>
-          </div>
-          <div class="school-item">
-            <div class="school-icon school-icon--high"><i class="fas fa-graduation-cap"></i></div>
-            <div class="school-info">
-              <strong>Grant High School</strong>
-              <span>9–12 · Portland Public Schools</span>
-            </div>
-            <div class="school-rating school-rating--high">7/10</div>
-          </div>
+          <!-- Populated by JS from NEIGHBORHOODS[name].schools -->
         </div>
-        <div class="district-badge">
+        <div class="district-badge" id="district-badge" style="display:none">
           <i class="fas fa-building-columns"></i>
-          <span>Portland Public Schools District</span>
+          <span id="district-name"></span>
         </div>
       </section>
 
@@ -207,10 +182,10 @@
       <!-- Community Photo Carousel -->
       <div class="photo-carousel nbhd-card" id="photo-carousel">
         <div class="photo-carousel-track" id="photo-carousel-track">
-          <!-- Slides injected by JS from NEIGHBORHOODS.photos -->
-          <div class="photo-slide photo-slide--placeholder">
+          <!-- Slides injected by JS from NEIGHBORHOODS[name].photos -->
+          <div class="photo-slide photo-slide--placeholder" id="photo-placeholder">
             <i class="fas fa-image"></i>
-            <span>Add photos via <code>NEIGHBORHOODS["Irvington"].photos</code></span>
+            <span>Add photos via <code>NEIGHBORHOODS["<span class="photo-nbhd-name"></span>"].photos</code></span>
           </div>
         </div>
         <div class="photo-carousel-dots" id="photo-carousel-dots"></div>
@@ -301,71 +276,7 @@
           <i class="fas fa-chevron-left"></i>
         </button>
         <div class="listings-carousel" id="listings-grid">
-          <div class="listing-card">
-            <div class="listing-img listing-img--1"><span class="listing-badge">Active</span></div>
-            <div class="listing-body">
-              <div class="listing-price">$549,000</div>
-              <div class="listing-addr">1847 NE Brazee St, Portland OR 97212</div>
-              <div class="listing-meta">
-                <span><i class="fas fa-bed"></i> 3 bd</span>
-                <span><i class="fas fa-bath"></i> 2 ba</span>
-                <span><i class="fas fa-ruler-combined"></i> 1,640 sqft</span>
-              </div>
-              <div class="listing-ppsf">$335/sqft · Listed 4 days ago</div>
-            </div>
-          </div>
-          <div class="listing-card">
-            <div class="listing-img listing-img--2"><span class="listing-badge">Active</span></div>
-            <div class="listing-body">
-              <div class="listing-price">$724,000</div>
-              <div class="listing-addr">2204 NE Thompson St, Portland OR 97212</div>
-              <div class="listing-meta">
-                <span><i class="fas fa-bed"></i> 4 bd</span>
-                <span><i class="fas fa-bath"></i> 3 ba</span>
-                <span><i class="fas fa-ruler-combined"></i> 2,210 sqft</span>
-              </div>
-              <div class="listing-ppsf">$328/sqft · Listed 8 days ago</div>
-            </div>
-          </div>
-          <div class="listing-card">
-            <div class="listing-img listing-img--3"><span class="listing-badge listing-badge--reduced">Price Reduced</span></div>
-            <div class="listing-body">
-              <div class="listing-price">$489,000 <span class="listing-was">$519,000</span></div>
-              <div class="listing-addr">3012 NE Knott St, Portland OR 97212</div>
-              <div class="listing-meta">
-                <span><i class="fas fa-bed"></i> 3 bd</span>
-                <span><i class="fas fa-bath"></i> 1 ba</span>
-                <span><i class="fas fa-ruler-combined"></i> 1,320 sqft</span>
-              </div>
-              <div class="listing-ppsf">$371/sqft · Listed 22 days ago</div>
-            </div>
-          </div>
-          <div class="listing-card">
-            <div class="listing-img listing-img--1"><span class="listing-badge listing-badge--pending">Pending</span></div>
-            <div class="listing-body">
-              <div class="listing-price">$612,500</div>
-              <div class="listing-addr">1504 NE Stanton St, Portland OR 97212</div>
-              <div class="listing-meta">
-                <span><i class="fas fa-bed"></i> 3 bd</span>
-                <span><i class="fas fa-bath"></i> 2 ba</span>
-                <span><i class="fas fa-ruler-combined"></i> 1,880 sqft</span>
-              </div>
-              <div class="listing-ppsf">$326/sqft · Listed 6 days ago</div>
-            </div>
-          </div>
-          <div class="listing-card">
-            <div class="listing-img listing-img--2"><span class="listing-badge">Active</span></div>
-            <div class="listing-body">
-              <div class="listing-price">$895,000</div>
-              <div class="listing-addr">2815 NE Hancock St, Portland OR 97212</div>
-              <div class="listing-meta">
-                <span><i class="fas fa-bed"></i> 5 bd</span>
-                <span><i class="fas fa-bath"></i> 3 ba</span>
-                <span><i class="fas fa-ruler-combined"></i> 2,940 sqft</span>
-              </div>
-              <div class="listing-ppsf">$304/sqft · Listed 11 days ago</div>
-            </div>
-          </div>
+          <!-- Populated by JS from NEIGHBORHOODS[name].listings -->
         </div>
         <button class="carousel-btn carousel-btn--next" id="carousel-next" aria-label="Next listings">
           <i class="fas fa-chevron-right"></i>

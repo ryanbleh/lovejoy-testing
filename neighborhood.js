@@ -204,6 +204,23 @@ document.addEventListener('DOMContentLoaded', () => {
     if (m.updated) setText('market-updated', m.updated);
   }
 
+  // Photo placeholder name
+  document.querySelectorAll('.photo-nbhd-name').forEach(el => el.textContent = nbhdName);
+
+  // District badge
+  if (N.schools?.length) {
+    const district = N.schools[0]?.district || '';
+    const badge = document.getElementById('district-badge');
+    const districtName = document.getElementById('district-name');
+    if (badge && districtName && district) {
+      districtName.textContent = district;
+      badge.style.display = '';
+    }
+  }
+
+  // Listings carousel
+  renderListings();
+
   // Amenities
   renderAmenities();
   injectAmenitiesSchema();
@@ -217,6 +234,54 @@ document.addEventListener('DOMContentLoaded', () => {
   // Modal
   initModal();
 });
+
+// ─── Listings Carousel Render ─────────────────
+const IMG_CLASSES = ['listing-img--1','listing-img--2','listing-img--3'];
+const STATUS_LABELS = {
+  active:  { label: 'Active',       cls: '' },
+  pending: { label: 'Pending',      cls: 'listing-badge--pending' },
+  reduced: { label: 'Price Reduced',cls: 'listing-badge--reduced' },
+  sold:    { label: 'Sold',         cls: 'listing-badge--sold' },
+};
+
+function renderListings() {
+  const grid = document.getElementById('listings-grid');
+  if (!grid) return;
+  const listings = N.listings || [];
+
+  if (!listings.length) {
+    grid.innerHTML = `<div class="listing-card listing-card--cta">
+      <div class="listing-cta-inner">
+        <i class="fas fa-magnifying-glass"></i>
+        <p>No listings data yet for ${nbhdName}. Add listings to <code>NEIGHBORHOODS["${nbhdName}"].listings</code>.</p>
+      </div>
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = listings.map((l, i) => {
+    const st = STATUS_LABELS[l.status] || STATUS_LABELS.active;
+    const imgCls = IMG_CLASSES[i % IMG_CLASSES.length];
+    const bgStyle = l.photo ? `style="background-image:url('${l.photo}')"` : '';
+    const wasHtml = l.originalPrice ? `<span class="listing-was">${l.originalPrice}</span>` : '';
+    return `
+      <div class="listing-card">
+        <div class="listing-img ${imgCls}" ${bgStyle}>
+          <span class="listing-badge ${st.cls}">${st.label}</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-price">${l.price} ${wasHtml}</div>
+          <div class="listing-addr">${l.address}</div>
+          <div class="listing-meta">
+            <span><i class="fas fa-bed"></i> ${l.beds} bd</span>
+            <span><i class="fas fa-bath"></i> ${l.baths} ba</span>
+            <span><i class="fas fa-ruler-combined"></i> ${l.sqft?.toLocaleString()} sqft</span>
+          </div>
+          <div class="listing-ppsf">${l.ppsf} · ${l.dom} on market</div>
+        </div>
+      </div>`;
+  }).join('');
+}
 
 // ─── Amenities ────────────────────────────────
 const AMENITY_CATS = [
