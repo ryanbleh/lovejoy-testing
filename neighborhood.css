@@ -1418,3 +1418,33 @@ body {
 .school-link:hover { opacity: 0.75; }
 .school-link--gs    { background: #e8f5f0; color: #00855D; }
 .school-link--niche { background: #eaecf8; color: #3E54AC; }
+
+/* ─── Scores card in right column ────────────── */
+.nbhd-card--scores { padding: 20px 24px; }
+.scores-trio-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 8px;
+}
+.score-trio-full {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  text-align: center;
+  flex: 1;
+}
+.score-trio-full strong {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  color: #2c2c2c;
+  letter-spacing: 0.3px;
+}
+.score-trio-full span {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 300;
+  color: #999;
+}

@@ -134,22 +134,6 @@
         <span class="mstat-label">Open Houses</span>
       </div>
 
-      <!-- Secondary: walk/bike/transit -->
-      <div class="mstat-divider mstat-divider--tall"></div>
-      <div class="score-trio">
-        <div class="score-trio-item">
-          <div class="score-circle-sm" id="sc-walk">85</div>
-          <span id="sc-walk-label">Walk</span>
-        </div>
-        <div class="score-trio-item">
-          <div class="score-circle-sm" id="sc-bike">92</div>
-          <span id="sc-bike-label">Bike</span>
-        </div>
-        <div class="score-trio-item">
-          <div class="score-circle-sm" id="sc-transit">67</div>
-          <span id="sc-transit-label">Transit</span>
-        </div>
-      </div>
 
     </div>
   </div>
@@ -246,6 +230,27 @@
       </section>
 
       <!-- Nearby Neighborhoods — right column -->
+      <!-- Transit scores -->
+      <section class="nbhd-card nbhd-card--scores" id="scores">
+        <div class="scores-trio-row">
+          <div class="score-trio-full">
+            <div class="score-circle-sm" id="sc-walk">—</div>
+            <strong>Walk Score</strong>
+            <span id="sc-walk-label">—</span>
+          </div>
+          <div class="score-trio-full">
+            <div class="score-circle-sm" id="sc-bike">—</div>
+            <strong>Bike Score</strong>
+            <span id="sc-bike-label">—</span>
+          </div>
+          <div class="score-trio-full">
+            <div class="score-circle-sm" id="sc-transit">—</div>
+            <strong>Transit Score</strong>
+            <span id="sc-transit-label">—</span>
+          </div>
+        </div>
+      </section>
+
       <section class="nbhd-card" id="nearby">
         <h2 class="nbhd-card-title">Nearby Neighborhoods</h2>
         <div class="nearby-chips" id="nearby-chips">
