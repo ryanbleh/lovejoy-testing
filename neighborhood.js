@@ -428,11 +428,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="school-icon ${iconBg}"><i class="fas ${icon}"></i></div>
             <div class="school-info">
               <strong>${s.name}</strong>
-              <span>${s.district}</span>
+              <span>${s.grades} · ${s.district}</span>
             </div>
             <div class="school-item-right">
               ${gsBtn || nicheBtn ? `<div class="school-links">${gsBtn}${nicheBtn}</div>` : ''}
-              <div class="school-rating school-rating--${rClass}">${s.rating}/10</div>
             </div>
           </div>`;
       }).join('');
