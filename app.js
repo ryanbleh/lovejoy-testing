@@ -270,6 +270,12 @@ function updateInfoBox(osmId, name, desc) {
   set('ns-list',      m?.list);
   set('ns-reduced',   m?.reduced);
   set('ns-reduction', m?.reduction);
+
+  // Update "Full Neighborhood Guide" link
+  const guideLink = document.querySelector('.nbhd-guide-link');
+  if (guideLink && name) {
+    guideLink.href = `neighborhood.html?n=${encodeURIComponent(name)}`;
+  }
 }
 
 // ─── Neighborhood Map + OSM Boundaries ──────────
