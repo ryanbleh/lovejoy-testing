@@ -114,8 +114,168 @@ const NEIGHBORHOODS = {
       },
     ],
   },
-  // ── Add more neighborhoods here ──────────────
-  // "Alameda": { osmId: 7631288, city: "Northeast Portland", ... },
+  // ─────────────────────────────────────────────
+
+  "Alameda": {
+    osmId: 7631288,
+    city: "Northeast Portland", zip: "97212", established: "Est. 1910s",
+    tagline: "Ridge-top neighborhood with sweeping city views, large lots, and some of the most architecturally distinctive homes in Portland.",
+    description: [
+      "Alameda sits on a basalt ridge running through inner NE, giving it views that few Portland neighborhoods can match. The ridge was platted in the early 1910s and the homes that went up — mostly Colonial Revivals, Tudors, and Craftsmans — reflected the ambitions of Portland's professional class at the time.",
+      "Today the neighborhood is one of the most consistently in-demand pockets of the city. Lot sizes are generous, tree canopy is dense, and turnover is low. When a well-maintained home hits the market here, it typically draws multiple offers within the first week.",
+      "Walkability is limited by the terrain but schools are strong, neighbors are invested, and the ridge itself is one of Portland's great assets."
+    ],
+    scores: { walk: 71, bike: 78, transit: 55 },
+    schools: [
+      { name: "Alameda Elementary",    grades: "K–5",  district: "Portland Public Schools", rating: 9 },
+      { name: "Harriet Tubman Middle", grades: "6–8",  district: "Portland Public Schools", rating: 6 },
+      { name: "Grant High School",     grades: "9–12", district: "Portland Public Schools", rating: 7 },
+    ],
+    nearby: ["Beaumont-Wilshire","Irvington","Grant Park","Hollywood","Rose City Park","Concordia"],
+    market: {
+      sold: "187",        range: "$495K – $1.45M",
+      median: "$685,000", ppsf: "$345",
+      dom: "12 days",     stl: "101.2%",
+      yoyMedian: "▲ 3.1%", yoyPpsf: "▲ 2.8%", yoyDom: "▼ 8.3%",
+      active: "24",       list: "$699,000",
+      reduced: "29%",     reduction: "4.2% off original",
+      updated: "Updated June 2, 2026 · Source: RMLS",
+    },
+    amenities: {
+      parks:   [{ name: "Alameda Park", detail: "Ridge-top green space with city views" }, { name: "Grant Park", detail: "Adjacent neighborhood park, 0.4 mi" }],
+      grocery: [{ name: "New Seasons Market", detail: "NE 33rd Ave · 0.6 mi" }, { name: "Fred Meyer", detail: "NE Broadway · 0.9 mi" }],
+      coffee:  [{ name: "Beaumont Market", detail: "NE Fremont · neighborhood café and market" }, { name: "Stumptown Coffee", detail: "Multiple nearby locations" }],
+      transit: [{ name: "TriMet Line 75", detail: "NE 39th Ave · North–South service" }, { name: "TriMet Line 24", detail: "Fremont St" }],
+    },
+    photos: [],
+    listings: [],
+  },
+
+  "Sellwood-Moreland": {
+    osmId: 7714440,
+    city: "Southeast Portland", zip: "97202", established: "Est. 1880s",
+    tagline: "Antique row, Willamette River access, and some of Portland's most coveted bungalows — consistently competitive market.",
+    description: [
+      "Sellwood sits at the southern end of inner SE, where the Willamette bends east and the streetcar suburb grid gives way to residential blocks that feel almost like a separate small town. The antique shops along SE 13th are a genuine local institution, not a manufactured district.",
+      "The housing stock skews older — Craftsmans, bungalows, and foursquares built between 1890 and 1930. Lot sizes are modest but the neighborhood density is comfortable. Sellwood Park and the riverfront trail give residents outdoor access that most of Portland has to drive to.",
+      "Demand is consistent and inventory is thin. The neighborhood attracts buyers who've done their research and know what they want."
+    ],
+    scores: { walk: 79, bike: 85, transit: 49 },
+    schools: [
+      { name: "Sellwood Middle School",  grades: "6–8",  district: "Portland Public Schools", rating: 7 },
+      { name: "Cleveland High School",   grades: "9–12", district: "Portland Public Schools", rating: 8 },
+      { name: "Llewellyn Elementary",    grades: "K–5",  district: "Portland Public Schools", rating: 8 },
+    ],
+    nearby: ["Eastmoreland","Woodstock","Brooklyn","Ardenwald","Milwaukie"],
+    market: {
+      sold: "203",        range: "$390K – $1.10M",
+      median: "$565,000", ppsf: "$338",
+      dom: "16 days",     stl: "100.4%",
+      yoyMedian: "▼ 1.2%", yoyPpsf: "▼ 1.8%", yoyDom: "▲ 28.4%",
+      active: "31",       list: "$549,000",
+      reduced: "44%",     reduction: "5.1% off original",
+      updated: "Updated June 2, 2026 · Source: RMLS",
+    },
+    amenities: {
+      parks:   [{ name: "Sellwood Park", detail: "22 acres, pool, river access, tennis" }, { name: "Oaks Bottom Wildlife Refuge", detail: "Wetland wildlife area along the Willamette" }],
+      grocery: [{ name: "New Seasons Market", detail: "SE Tacoma St · neighborhood anchor" }, { name: "Trader Joe's", detail: "SE Powell · 1.2 mi" }],
+      coffee:  [{ name: "Stumptown Coffee", detail: "SE 13th Ave · Sellwood location" }, { name: "Extracto Coffee", detail: "SE Milwaukie Ave" }],
+      transit: [{ name: "TriMet Line 70", detail: "SE 17th Ave · South Portland connector" }, { name: "TriMet Line 99", detail: "Barbur Blvd / Sellwood Bridge" }],
+    },
+    photos: [],
+    listings: [],
+  },
+
+  "Pearl District": {
+    osmId: 7692258,
+    city: "Northwest Portland", zip: "97209", established: "Est. 1990s",
+    tagline: "Portland's premier urban neighborhood — new construction condos, galleries, and strong long-term rental and resale demand.",
+    description: [
+      "The Pearl was an industrial railyard district until the late 1980s. What happened next was one of the more successful urban infill stories in the country — a combination of tax incentives, developer risk-taking, and genuine neighborhood building turned it into Portland's most walkable urban district.",
+      "The housing stock is almost entirely attached — condos and lofts, mostly built between 1995 and 2015. Prices per square foot are the highest in Portland. The tradeoff is access: Powell's Books, the Saturday Market, Whole Foods, and Tanner Springs Park are all within a few blocks.",
+      "The buyer here is typically someone who wants to be in the city, not near it. Buyers who value space over location tend to look elsewhere."
+    ],
+    scores: { walk: 98, bike: 95, transit: 90 },
+    schools: [
+      { name: "Chapman Elementary",  grades: "K–5",  district: "Portland Public Schools", rating: 7 },
+      { name: "West Sylvan Middle",  grades: "6–8",  district: "Portland Public Schools", rating: 7 },
+      { name: "Lincoln High School", grades: "9–12", district: "Portland Public Schools", rating: 8 },
+    ],
+    nearby: ["NW District","Old Town","Goose Hollow","South Portland","Lloyd District"],
+    market: {
+      sold: "312",        range: "$280K – $1.85M",
+      median: "$498,000", ppsf: "$512",
+      dom: "28 days",     stl: "98.6%",
+      yoyMedian: "▼ 2.4%", yoyPpsf: "▼ 1.9%", yoyDom: "▲ 41.2%",
+      active: "94",       list: "$519,000",
+      reduced: "58%",     reduction: "7.3% off original",
+      updated: "Updated June 2, 2026 · Source: RMLS",
+    },
+    amenities: {
+      parks:   [{ name: "Tanner Springs Park", detail: "Urban wetland park in the heart of the Pearl" }, { name: "The Fields Park", detail: "2-acre event and recreation lawn" }],
+      grocery: [{ name: "Whole Foods Market", detail: "NW Couch St · flagship Portland location" }, { name: "Trader Joe's", detail: "NW 21st Ave · 0.5 mi" }],
+      coffee:  [{ name: "Stumptown Coffee HQ", detail: "SW 3rd Ave · the original" }, { name: "Water Avenue Coffee", detail: "NW Kearney location" }],
+      transit: [{ name: "MAX Red/Blue/Green/Yellow", detail: "Union Station / Pearl stops — direct to airport, Hillsboro, Clackamas" }, { name: "Portland Streetcar NS Line", detail: "Runs through the Pearl north–south" }],
+    },
+    photos: [],
+    listings: [],
+  },
+
+  "Lake Oswego": {
+    osmId: 186576,
+    city: "Inner Suburb", zip: "97034", established: "Inc. 1910",
+    tagline: "Top-rated schools, lake access, and a consistently tight inventory that supports strong long-term values.",
+    description: [
+      "Lake Oswego sits 8 miles south of downtown Portland, separated from the city by the Willamette River and a set of hills that help define its character. It incorporated in 1910 around the iron smelter on Oswego Lake and has evolved into one of the most consistently in-demand suburban markets in the metro.",
+      "The school district is the draw for many buyers — Lake Oswego schools regularly rank among the top in Oregon. The lake itself is privately controlled, with access tied to certain properties, but the surrounding parks and the Willamette riverfront are public.",
+      "The market is among the most competitive in the Portland metro. Inventory rarely stays available long, and price reductions are less common here than elsewhere in the region."
+    ],
+    scores: { walk: 52, bike: 44, transit: 38 },
+    schools: [
+      { name: "Lake Oswego Elementary", grades: "K–5",  district: "Lake Oswego School District", rating: 10 },
+      { name: "Lake Oswego Middle",     grades: "6–8",  district: "Lake Oswego School District", rating: 9 },
+      { name: "Lake Oswego High School",grades: "9–12", district: "Lake Oswego School District", rating: 9 },
+    ],
+    nearby: ["West Linn","Tualatin","Milwaukie","Sellwood-Moreland","South Portland"],
+    market: {
+      sold: "418",        range: "$420K – $3.20M",
+      median: "$785,000", ppsf: "$358",
+      dom: "21 days",     stl: "99.1%",
+      yoyMedian: "▲ 1.8%", yoyPpsf: "▲ 0.9%", yoyDom: "▲ 16.7%",
+      active: "62",       list: "$825,000",
+      reduced: "38%",     reduction: "5.8% off original",
+      updated: "Updated June 2, 2026 · Source: RMLS",
+    },
+    amenities: {
+      parks:   [{ name: "George Rogers Park", detail: "Willamette River access, historic iron furnace site" }, { name: "Oswego Lake", detail: "Private lake — access tied to specific properties and HOAs" }],
+      grocery: [{ name: "Zupan's Markets", detail: "SW Kruse Way · premium local grocer" }, { name: "New Seasons Market", detail: "Kruse Village · 1 mi" }],
+      coffee:  [{ name: "Starbucks Reserve", detail: "Lake Oswego Town Square" }, { name: "Spella Caffè", detail: "Local Portland roaster, LO location" }],
+      transit: [{ name: "TriMet Line 35", detail: "Macadam Ave · direct to downtown Portland" }, { name: "TriMet Line 36", detail: "Maplewood / South Macadam" }],
+    },
+    photos: [],
+    listings: [],
+  },
+
+  // ── Template for new neighborhoods ───────────
+  // Copy this block and fill in your data:
+  //
+  // "Neighborhood Name": {
+  //   osmId:       0,          // from neighborhoods.geojson osm_id (positive)
+  //   city:        "",         // e.g. "Northeast Portland"
+  //   zip:         "",
+  //   established: "",         // e.g. "Est. 1920s"
+  //   tagline:     "",         // one-line hero summary
+  //   description: ["","",""], // 2–3 paragraphs
+  //   scores: { walk: 0, bike: 0, transit: 0 },
+  //   schools: [{ name: "", grades: "", district: "", rating: 0 }],
+  //   nearby: [],
+  //   market: { sold:"", range:"", median:"", ppsf:"", dom:"", stl:"",
+  //             yoyMedian:"", yoyPpsf:"", yoyDom:"",
+  //             active:"", list:"", reduced:"", reduction:"", updated:"" },
+  //   amenities: { parks:[], grocery:[], coffee:[], transit:[] },
+  //   photos: [],   // [{ url:"", caption:"" }]
+  //   listings: [], // [{ lat, lng, price, address, beds, baths, sqft, ppsf, status, dom, mls }]
+  // },
 };
 
 // ─── Resolve which neighborhood to show ──────
@@ -143,8 +303,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Description
   const descEl = document.getElementById('h-description');
-  if (descEl && N.description?.length) {
-    descEl.innerHTML = N.description.map(p => `<p>${p}</p>`).join('');
+  if (descEl) {
+    descEl.innerHTML = N.description?.length
+      ? N.description.map(p => `<p>${p}</p>`).join('')
+      : `<p style="color:#aaa;font-style:italic">Description not yet added for ${nbhdName}. Add it to <code>NEIGHBORHOODS["${nbhdName}"].description</code> in neighborhood.js.</p>`;
   }
 
   // Walk/Bike/Transit scores
@@ -155,10 +317,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Schools
-  if (N.schools?.length) {
-    const list = document.getElementById('schools-list');
-    if (list) {
-      list.innerHTML = N.schools.map(s => {
+  const schoolList = document.getElementById('schools-list');
+  if (schoolList) {
+    if (N.schools?.length) {
+      schoolList.innerHTML = N.schools.map(s => {
         const rClass = s.rating >= 8 ? 'high' : s.rating >= 6 ? 'mid' : 'low';
         const icon   = s.grades.startsWith('9') ? 'fa-graduation-cap' : 'fa-school';
         const iconBg = s.grades.startsWith('9') ? 'school-icon--high' : '';
@@ -172,16 +334,20 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="school-rating school-rating--${rClass}">${s.rating}/10</div>
           </div>`;
       }).join('');
+    } else {
+      schoolList.innerHTML = `<p style="font-family:var(--font-body);font-size:13px;color:#aaa;padding:8px 0">School data not yet added for ${nbhdName}.</p>`;
     }
   }
 
   // Nearby chips
-  if (N.nearby?.length) {
-    const chips = document.getElementById('nearby-chips');
-    if (chips) {
-      chips.innerHTML = N.nearby.map(n =>
-        `<a href="?n=${encodeURIComponent(n)}" class="nearby-chip">${n}</a>`
+  const chipsEl = document.getElementById('nearby-chips');
+  if (chipsEl) {
+    if (N.nearby?.length) {
+      chipsEl.innerHTML = N.nearby.map(n =>
+        `<a href="neighborhood.html?n=${encodeURIComponent(n)}" class="nearby-chip">${n}</a>`
       ).join('');
+    } else {
+      chipsEl.innerHTML = `<p style="font-family:var(--font-body);font-size:13px;color:#aaa">Not yet configured.</p>`;
     }
   }
 
