@@ -1448,3 +1448,15 @@ body {
   font-weight: 300;
   color: #999;
 }
+
+/* ─── School item right-side layout ─────────── */
+.school-item-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.school-item-right .school-links {
+  margin-top: 0;
+}
