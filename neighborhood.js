@@ -135,6 +135,43 @@ const NEIGHBORHOODS = {
       ],
     },
 
+    // ── Open Houses ──────────────────────────────
+    openHouses: [
+      {
+        date: "Sat, Jun 7",
+        time: "1:00 – 3:00 PM",
+        lat: 45.5340, lng: -122.6420,
+        price: "$549,000",
+        address: "1847 NE Brazee St",
+        beds: 3, baths: 2, sqft: 1640,
+        ppsf: "$335/sqft",
+        mls: "24123456",
+        photo: null,
+      },
+      {
+        date: "Sun, Jun 8",
+        time: "11:00 AM – 1:00 PM",
+        lat: 45.5328, lng: -122.6385,
+        price: "$724,000",
+        address: "2204 NE Thompson St",
+        beds: 4, baths: 3, sqft: 2210,
+        ppsf: "$328/sqft",
+        mls: "24123457",
+        photo: null,
+      },
+      {
+        date: "Sun, Jun 8",
+        time: "2:00 – 4:00 PM",
+        lat: 45.5352, lng: -122.6398,
+        price: "$489,000",
+        address: "3012 NE Knott St",
+        beds: 3, baths: 1, sqft: 1320,
+        ppsf: "$371/sqft",
+        mls: "24123458",
+        photo: null,
+      },
+    ],
+
     // ── Community photos ─────────────────────────
     // Add URLs to show in the right column carousel
     photos: [
@@ -390,10 +427,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (N.market) {
     setText('sb-median',  N.market.median || '—');
     setText('sb-ppsf',    N.market.ppsf   || '—');
-    const activeVal = N.market.active ? `${N.market.active}` : '—';
-    setText('sb-active',  activeVal);
-    setText('sb-open-houses', N.openHouses ?? '—');
+    setText('sb-active',  N.market.active  || '—');
+    setText('sb-open-houses', N.openHouses?.length ? String(N.openHouses.length) : '0');
   }
+  setText('open-houses-name', nbhdName);
 
   // Walk/Bike/Transit scores (secondary)
   if (N.scores) {
@@ -487,6 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Listings carousel
   renderListings();
+  renderOpenHouses();
 
   // Amenities
   renderAmenities();
@@ -548,6 +586,92 @@ function renderListings() {
         </div>
       </div>`;
   }).join('');
+
+  initCarousel('listings-grid', 'carousel-prev', 'carousel-next', 'carousel-dots');
+}
+
+// ─── Open Houses Render ───────────────────────
+function renderOpenHouses() {
+  const grid    = document.getElementById('oh-listings-grid');
+  const section = document.getElementById('open-houses');
+  if (!grid) return;
+
+  const houses = N.openHouses || [];
+
+  if (!houses.length) {
+    if (section) section.style.display = 'none';
+    return;
+  }
+
+  grid.innerHTML = houses.map((h, i) => {
+    const imgCls = IMG_CLASSES[i % IMG_CLASSES.length];
+    const bgStyle = h.photo ? `style="background-image:url('${h.photo}')"` : '';
+    return `
+      <div class="listing-card">
+        <div class="listing-img ${imgCls}" ${bgStyle}>
+          <div class="oh-date-badge">
+            <span class="oh-date">${h.date}</span>
+            <span class="oh-time">${h.time}</span>
+          </div>
+        </div>
+        <div class="listing-body">
+          <div class="listing-price">${h.price}</div>
+          <div class="listing-addr">${h.address}</div>
+          <div class="listing-meta">
+            <span><i class="fas fa-bed"></i> ${h.beds} bd</span>
+            <span><i class="fas fa-bath"></i> ${h.baths} ba</span>
+            <span><i class="fas fa-ruler-combined"></i> ${h.sqft?.toLocaleString()} sqft</span>
+          </div>
+          <div class="listing-ppsf">${h.ppsf} · MLS# ${h.mls}</div>
+        </div>
+      </div>`;
+  }).join('');
+
+  // Init carousel
+  initCarousel('oh-listings-grid', 'oh-carousel-prev', 'oh-carousel-next', 'oh-carousel-dots');
+}
+
+function initCarousel(gridId, prevId, nextId, dotsId) {
+  const track   = document.getElementById(gridId);
+  const prevBtn = document.getElementById(prevId);
+  const nextBtn = document.getElementById(nextId);
+  const dotsWrap= document.getElementById(dotsId);
+  if (!track) return;
+
+  const cards = Array.from(track.querySelectorAll('.listing-card'));
+  if (!cards.length) return;
+
+  const cardW = () => (cards[0]?.offsetWidth || 280) + 16;
+  const vis   = () => Math.max(1, Math.round(track.offsetWidth / cardW()));
+  const pages = () => Math.ceil(cards.length / vis());
+  let idx = 0;
+
+  if (dotsWrap) {
+    for (let i = 0; i < pages(); i++) {
+      const d = document.createElement('button');
+      d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(d);
+    }
+  }
+
+  function goTo(i) {
+    idx = Math.max(0, Math.min(i, pages() - 1));
+    track.scrollTo({ left: idx * cardW() * vis(), behavior: 'smooth' });
+    dotsWrap?.querySelectorAll('.carousel-dot').forEach((d, j) =>
+      d.classList.toggle('active', j === idx));
+    if (prevBtn) prevBtn.disabled = idx === 0;
+    if (nextBtn) nextBtn.disabled = idx >= pages() - 1;
+  }
+
+  prevBtn?.addEventListener('click', () => goTo(idx - 1));
+  nextBtn?.addEventListener('click', () => goTo(idx + 1));
+  track.addEventListener('scroll', () => {
+    const i = Math.round(track.scrollLeft / (cardW() * vis()));
+    if (i !== idx) { idx = i; dotsWrap?.querySelectorAll('.carousel-dot').forEach((d,j) => d.classList.toggle('active', j===idx)); }
+  }, { passive: true });
+
+  goTo(0);
 }
 
 // ─── Amenities ────────────────────────────────
@@ -818,46 +942,8 @@ function transitLabel(s) {
   return "Minimal Transit";
 }
 
-// ─── Listings Carousel ───────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  const track   = document.getElementById('listings-grid');
-  const prevBtn = document.getElementById('carousel-prev');
-  const nextBtn = document.getElementById('carousel-next');
-  const dotsWrap= document.getElementById('carousel-dots');
-  if (!track) return;
-
-  const cards = Array.from(track.querySelectorAll('.listing-card'));
-  const cardW = () => (cards[0]?.offsetWidth || 280) + 16;
-  const vis   = () => Math.max(1, Math.round(track.offsetWidth / cardW()));
-  const pages = () => Math.ceil(cards.length / vis());
-  let idx = 0;
-
-  // Build dots
-  for (let i = 0; i < pages(); i++) {
-    const d = document.createElement('button');
-    d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-    d.addEventListener('click', () => goTo(i));
-    dotsWrap.appendChild(d);
-  }
-
-  function goTo(i) {
-    idx = Math.max(0, Math.min(i, pages() - 1));
-    track.scrollTo({ left: idx * cardW() * vis(), behavior: 'smooth' });
-    dotsWrap.querySelectorAll('.carousel-dot').forEach((d, j) =>
-      d.classList.toggle('active', j === idx));
-    if (prevBtn) prevBtn.disabled = idx === 0;
-    if (nextBtn) nextBtn.disabled = idx >= pages() - 1;
-  }
-
-  prevBtn?.addEventListener('click', () => goTo(idx - 1));
-  nextBtn?.addEventListener('click', () => goTo(idx + 1));
-  track.addEventListener('scroll', () => {
-    const i = Math.round(track.scrollLeft / (cardW() * vis()));
-    if (i !== idx) { idx = i; dotsWrap.querySelectorAll('.carousel-dot').forEach((d,j) => d.classList.toggle('active', j===idx)); }
-  }, { passive: true });
-
-  goTo(0);
-});
+// ─── Init listing carousel after render ───────
+// (renderListings and renderOpenHouses each call initCarousel directly)
 
 // ─── Community Photo Carousel ─────────────────
 document.addEventListener('DOMContentLoaded', () => {
