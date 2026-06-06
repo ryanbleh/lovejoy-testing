@@ -511,17 +511,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Photo placeholder name
   document.querySelectorAll('.photo-nbhd-name').forEach(el => el.textContent = nbhdName);
 
-  // District badge
-  if (N.schools?.length) {
-    const district = N.schools[0]?.district || '';
-    const badge = document.getElementById('district-badge');
-    const districtName = document.getElementById('district-name');
-    if (badge && districtName && district) {
-      districtName.textContent = district;
-      badge.style.display = '';
-    }
-  }
-
   // Listings carousel
   renderListings();
   renderOpenHouses();
