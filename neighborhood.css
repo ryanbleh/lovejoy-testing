@@ -1302,3 +1302,119 @@ body {
   z-index: 500;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
+
+/* ─── Market Stats Bar ───────────────────────── */
+.market-stats-bar {
+  background: #fff;
+  border-bottom: 1px solid #e5e5e5;
+}
+.market-stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Primary market stat blocks */
+.mstat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 32px;
+  flex: 1;
+  min-width: 120px;
+  text-align: center;
+}
+.mstat-value {
+  font-family: var(--font-headline);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--blue, #296886);
+  line-height: 1;
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+.mstat-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  color: #888;
+  white-space: nowrap;
+}
+.mstat-divider {
+  width: 1px;
+  height: 40px;
+  background: #e5e5e5;
+  flex-shrink: 0;
+}
+.mstat-divider--tall { height: 56px; }
+
+/* Walk/bike/transit trio */
+.score-trio {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 28px;
+  flex-shrink: 0;
+}
+.score-trio-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.score-trio-item span {
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #aaa;
+}
+.score-circle-sm {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2.5px solid var(--blue, #296886);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-headline);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue, #296886);
+}
+
+@media (max-width: 768px) {
+  .market-stats-inner { padding: 0 16px; }
+  .mstat-item { padding: 20px 16px; }
+  .mstat-value { font-size: 20px; }
+  .mstat-divider { display: none; }
+  .score-trio { padding: 16px; gap: 12px; }
+}
+
+/* ─── School rating links ────────────────────── */
+.school-links {
+  display: flex;
+  gap: 8px;
+  margin-top: 5px;
+  flex-wrap: wrap;
+}
+.school-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  text-decoration: none;
+  padding: 3px 8px 3px 4px;
+  border-radius: 3px;
+  transition: opacity 0.15s;
+  line-height: 1;
+}
+.school-link:hover { opacity: 0.75; }
+.school-link--gs    { background: #e8f5f0; color: #00855D; }
+.school-link--niche { background: #eaecf8; color: #3E54AC; }

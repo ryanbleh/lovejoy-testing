@@ -108,33 +108,49 @@
   </section>
   
   <!-- ══════════════════════════════════════════ -->
-  <!-- SCORES BAR                                 -->
+  <!-- MARKET STATS + SCORES BAR                  -->
   <!-- ══════════════════════════════════════════ -->
-  <div class="scores-bar">
-    <div class="scores-inner">
-      <div class="score-item">
-        <div class="score-circle" id="sc-walk" data-score="85" data-color="#296886">85</div>
-        <div class="score-meta">
-          <strong>Walk Score</strong>
-          <span id="sc-walk-label">Very Walkable</span>
+  <div class="market-stats-bar">
+    <div class="market-stats-inner">
+
+      <!-- Primary market stats -->
+      <div class="mstat-item">
+        <span class="mstat-value" id="sb-median">—</span>
+        <span class="mstat-label">Average Value</span>
+      </div>
+      <div class="mstat-divider"></div>
+      <div class="mstat-item">
+        <span class="mstat-value" id="sb-ppsf">—</span>
+        <span class="mstat-label">Average Price per Sq Ft</span>
+      </div>
+      <div class="mstat-divider"></div>
+      <div class="mstat-item">
+        <span class="mstat-value" id="sb-active">—</span>
+        <span class="mstat-label">Homes For Sale</span>
+      </div>
+      <div class="mstat-divider"></div>
+      <div class="mstat-item">
+        <span class="mstat-value" id="sb-open-houses">—</span>
+        <span class="mstat-label">Open Houses</span>
+      </div>
+
+      <!-- Secondary: walk/bike/transit -->
+      <div class="mstat-divider mstat-divider--tall"></div>
+      <div class="score-trio">
+        <div class="score-trio-item">
+          <div class="score-circle-sm" id="sc-walk">85</div>
+          <span id="sc-walk-label">Walk</span>
+        </div>
+        <div class="score-trio-item">
+          <div class="score-circle-sm" id="sc-bike">92</div>
+          <span id="sc-bike-label">Bike</span>
+        </div>
+        <div class="score-trio-item">
+          <div class="score-circle-sm" id="sc-transit">67</div>
+          <span id="sc-transit-label">Transit</span>
         </div>
       </div>
-      <div class="score-divider"></div>
-      <div class="score-item">
-        <div class="score-circle" id="sc-bike" data-score="92" data-color="#296886">92</div>
-        <div class="score-meta">
-          <strong>Bike Score</strong>
-          <span id="sc-bike-label">Biker's Paradise</span>
-        </div>
-      </div>
-      <div class="score-divider"></div>
-      <div class="score-item">
-        <div class="score-circle" id="sc-transit" data-score="67" data-color="#296886">67</div>
-        <div class="score-meta">
-          <strong>Transit Score</strong>
-          <span id="sc-transit-label">Excellent Transit</span>
-        </div>
-      </div>
+
     </div>
   </div>
 

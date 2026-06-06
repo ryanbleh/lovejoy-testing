@@ -1,4 +1,81 @@
 // ══════════════════════════════════════════════
+// PPS SCHOOL URL LOOKUP
+// Keyed by school name for GreatSchools / Niche links
+// ══════════════════════════════════════════════
+const PPS_SCHOOLS = {
+  "Abernethy Elementary":          { niche: "https://www.niche.com/k12/abernethy-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/864-Abernethy-Elementary-School/" },
+  "Ainsworth Elementary":          { niche: "https://www.niche.com/k12/ainsworth-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/865-Ainsworth-Elementary-School/" },
+  "Alameda Elementary":            { niche: "https://www.niche.com/k12/alameda-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/866-Alameda-Elementary-School/" },
+  "Atkinson Elementary":           { niche: "https://www.niche.com/k12/atkinson-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/870-Atkinson-Elementary-School/" },
+  "Arleta Elementary":             { niche: "https://www.niche.com/k12/arleta-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/868-Arleta-Elementary-School/" },
+  "Beach Elementary":              { niche: "https://www.niche.com/k12/beach-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/872-Beach-Elementary-School/" },
+  "Boise-Eliot/Humboldt":          { niche: "https://www.niche.com/k12/boise-eliot-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/875-Boise-Eliot-Elementary-School/" },
+  "Bridlemile Elementary":         { niche: "https://www.niche.com/k12/bridlemile-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/877-Bridlemile-Elementary-School/" },
+  "Buckman Elementary":            { niche: "https://www.niche.com/k12/buckman-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/879-Buckman-Elementary-School/" },
+  "Chapman Elementary":            { niche: "https://www.niche.com/k12/chapman-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/881-Chapman-Elementary-School/" },
+  "Chief Joseph Elementary":       { niche: "https://www.niche.com/k12/chief-joseph-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/882-Chief-Joseph-Elementary-School/" },
+  "Creston Elementary":            { niche: "https://www.niche.com/k12/creston-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/885-Creston-Elementary-School/" },
+  "Duniway Elementary":            { niche: "https://www.niche.com/k12/duniway-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/886-Duniway-Elementary-School/" },
+  "Forest Park Elementary":        { niche: "https://www.niche.com/k12/forest-park-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/969-Forest-Park-Elementary-School/" },
+  "Glencoe Elementary":            { niche: "https://www.niche.com/k12/glencoe-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/891-Glencoe-Elementary-School/" },
+  "Grout Elementary":              { niche: "https://www.niche.com/k12/grout-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/894-Grout-Elementary-School/" },
+  "Hayhurst Elementary":           { niche: "https://www.niche.com/k12/hayhurst-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/895-Hayhurst-Elementary-School/" },
+  "Irvington Elementary":          { niche: "https://www.niche.com/k12/irvington-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/899-Irvington-Elementary-School/" },
+  "James John Elementary":         { niche: "https://www.niche.com/k12/james-john-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/900-James-John-Elementary-School/" },
+  "Kelly Elementary":              { niche: "https://www.niche.com/k12/kelly-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/902-Kelly-Elementary-School/" },
+  "Lewis Elementary":              { niche: "https://www.niche.com/k12/lewis-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/909-Lewis-Elementary-School/" },
+  "Llewellyn Elementary":          { niche: "https://www.niche.com/k12/llewellyn-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/910-Llewellyn-Elementary-School/" },
+  "Lent Elementary":               { niche: "https://www.niche.com/k12/lent-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/908-Lent-Elementary-School/" },
+  "Maplewood Elementary":          { niche: "https://www.niche.com/k12/maplewood-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/911-Maplewood-Elementary-School/" },
+  "Markham Elementary":            { niche: "https://www.niche.com/k12/markham-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/912-Markham-Elementary-School/" },
+  "Marysville Elementary":         { niche: "https://www.niche.com/k12/marysville-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/913-Marysville-Elementary-School/" },
+  "Martin Luther King Jr. Elementary": { niche: "https://www.niche.com/k12/martin-luther-king-jr-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/904-King-Elementary-School/" },
+  "Peninsula Elementary":          { niche: "https://www.niche.com/k12/peninsula-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/917-Peninsula-Elementary-School/" },
+  "Rieke Elementary":              { niche: "https://www.niche.com/k12/rieke-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/863-Rieke-Elementary-School/" },
+  "Richmond Elementary":           { niche: "https://www.niche.com/k12/richmond-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/920-Richmond-Elementary-School/" },
+  "Rosa Parks Elementary":         { niche: "https://www.niche.com/k12/rosa-parks-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/871-Rosa-Parks-Elementary-School/" },
+  "Rose City Park":                { niche: "https://www.niche.com/k12/rose-city-park-portland-or/", gs: "https://www.greatschools.org/oregon/portland/4217-Rose-City-Park/" },
+  "Sabin Elementary":              { niche: "https://www.niche.com/k12/sabin-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/923-Sabin-Elementary-School/" },
+  "Scott Elementary":              { niche: "https://www.niche.com/k12/scott-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/924-Scott-Elementary-School/" },
+  "Sitton Elementary":             { niche: "https://www.niche.com/k12/sitton-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/926-Sitton-Elementary-School/" },
+  "Stephenson Elementary":         { niche: "https://www.niche.com/k12/stephenson-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/929-Stephenson-Elementary-School/" },
+  "Vestal Elementary":             { niche: "https://www.niche.com/k12/vestal-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/932-Vestal-Elementary-School/" },
+  "Whitman Elementary":            { niche: "https://www.niche.com/k12/whitman-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/936-Whitman-Elementary-School/" },
+  "Woodlawn Elementary":           { niche: "https://www.niche.com/k12/woodlawn-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/938-Woodlawn-Elementary-School/" },
+  "Woodmere Elementary":           { niche: "https://www.niche.com/k12/woodmere-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/939-Woodmere-Elementary-School/" },
+  "Woodstock Elementary":          { niche: "https://www.niche.com/k12/woodstock-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/940-Woodstock-Elementary-School/" },
+  "Laurelhurst School":            { niche: "https://www.niche.com/k12/laurelhurst-elementary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/906-Laurelhurst-Elementary-School/" },
+  "Beverly Cleary School":         { niche: "https://www.niche.com/k12/beverly-cleary-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/896-Beverly-Cleary-School/" },
+  "Sunnyside Environmental School":{ niche: "https://www.niche.com/k12/sunnyside-environmental-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/930-Sunnyside-Environmental-School/" },
+  "Beaumont Middle School":        { niche: "https://www.niche.com/k12/beaumont-middle-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/873-Beaumont-Middle-School/" },
+  "da Vinci Arts Middle School":   { niche: "https://www.niche.com/k12/da-vinci-middle-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/960-Da-Vinci-Middle-School/" },
+  "George Middle School":          { niche: "https://www.niche.com/k12/george-middle-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/890-George-Middle-School/" },
+  "Harriet Tubman Middle School":  { niche: "https://www.niche.com/k12/harriet-tubman-middle-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/963-Harriet-Tubman-Middle-School/" },
+  "Harriet Tubman Middle":         { niche: "https://www.niche.com/k12/harriet-tubman-middle-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/963-Harriet-Tubman-Middle-School/" },
+  "Harrison Park School":          { niche: "https://www.niche.com/k12/harrison-park-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/884-Harrison-Park-School/" },
+  "Hosford Middle School":         { niche: "https://www.niche.com/k12/hosford-middle-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/897-Hosford-Middle-School/" },
+  "Jackson Middle School":         { niche: "https://www.niche.com/k12/jackson-middle-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/964-Jackson-Middle-School/" },
+  "Kellogg Middle School":         { niche: "https://www.niche.com/k12/kellogg-middle-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/901-Kellogg-Middle-School/" },
+  "Lane Middle School":            { niche: "https://www.niche.com/k12/lane-middle-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/905-Lane-Middle-School/" },
+  "Mt. Tabor Middle School":       { niche: "https://www.niche.com/k12/mt-tabor-middle-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/915-Mt-Tabor-Middle-School/" },
+  "Ockley Green School":           { niche: "https://www.niche.com/k12/ockley-green-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/916-Ockley-Green/" },
+  "Robert Gray Middle School":     { niche: "https://www.niche.com/k12/gray-middle-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/892-Gray-Middle-School/" },
+  "Roseway Heights School":        { niche: "https://www.niche.com/k12/roseway-heights-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/922-Roseway-Heights-School/" },
+  "Sellwood Middle School":        { niche: "https://www.niche.com/k12/sellwood-middle-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/925-Sellwood-Middle-School/" },
+  "West Sylvan Middle School":     { niche: "https://www.niche.com/k12/west-sylvan-middle-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/934-West-Sylvan-Middle-School/" },
+  "West Sylvan Middle":            { niche: "https://www.niche.com/k12/west-sylvan-middle-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/934-West-Sylvan-Middle-School/" },
+  "Benson Polytechnic High School":{ niche: "https://www.niche.com/k12/benson-polytechnic-high-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/942-Benson-Polytechnic-High-School/" },
+  "Cleveland High School":         { niche: "https://www.niche.com/k12/cleveland-high-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/944-Cleveland-High-School/" },
+  "Franklin High School":          { niche: "https://www.niche.com/k12/franklin-high-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/946-Franklin-High-School/" },
+  "Grant High School":             { niche: "https://www.niche.com/k12/grant-high-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/948-Grant-High-School/" },
+  "Ida B. Wells High School":      { niche: "https://www.niche.com/k12/ida-b-wells-barnett-high-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/957-Wilson-High-School/" },
+  "Jefferson High School":         { niche: "https://www.niche.com/k12/jefferson-high-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/949-Jefferson-High-School/" },
+  "Leodis V. McDaniel High School":{ niche: "https://www.niche.com/k12/leodis-v-mcdaniel-high-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/952-Madison-High-School/" },
+  "Lincoln High School":           { niche: "https://www.niche.com/k12/lincoln-high-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/950-Lincoln-High-School/" },
+  "Roosevelt High School":         { niche: "https://www.niche.com/k12/roosevelt-high-school-portland-or/", gs: "https://www.greatschools.org/oregon/portland/954-Roosevelt-High-School/" },
+};
+
+// ══════════════════════════════════════════════
 // NEIGHBORHOOD PAGE DATA
 // Edit NEIGHBORHOOD below to configure any neighborhood.
 // Alternatively, pass ?n=NeighborhoodName in the URL.
@@ -309,11 +386,20 @@ document.addEventListener('DOMContentLoaded', () => {
       : `<p style="color:#aaa;font-style:italic">Description not yet added for ${nbhdName}. Add it to <code>NEIGHBORHOODS["${nbhdName}"].description</code> in neighborhood.js.</p>`;
   }
 
-  // Walk/Bike/Transit scores
+  // Market stats bar (primary)
+  if (N.market) {
+    setText('sb-median',  N.market.median || '—');
+    setText('sb-ppsf',    N.market.ppsf   || '—');
+    const activeVal = N.market.active ? `${N.market.active}` : '—';
+    setText('sb-active',  activeVal);
+    setText('sb-open-houses', N.openHouses ?? '—');
+  }
+
+  // Walk/Bike/Transit scores (secondary)
   if (N.scores) {
-    setScore('sc-walk',    N.scores.walk,    walkLabel(N.scores.walk));
-    setScore('sc-bike',    N.scores.bike,    bikeLabel(N.scores.bike));
-    setScore('sc-transit', N.scores.transit, transitLabel(N.scores.transit));
+    setScoreSm('sc-walk',    N.scores.walk,    walkLabel(N.scores.walk));
+    setScoreSm('sc-bike',    N.scores.bike,    bikeLabel(N.scores.bike));
+    setScoreSm('sc-transit', N.scores.transit, transitLabel(N.scores.transit));
   }
 
   // Schools
@@ -324,12 +410,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const rClass = s.rating >= 8 ? 'high' : s.rating >= 6 ? 'mid' : 'low';
         const icon   = s.grades.startsWith('9') ? 'fa-graduation-cap' : 'fa-school';
         const iconBg = s.grades.startsWith('9') ? 'school-icon--high' : '';
+        const urls   = PPS_SCHOOLS[s.name] || {};
+        const gsBtn  = urls.gs
+          ? `<a href="${urls.gs}" target="_blank" rel="noopener" class="school-link school-link--gs" title="GreatSchools">
+               <svg viewBox="0 0 24 24" width="14" height="14"><circle cx="12" cy="12" r="12" fill="#00855D"/><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="10" font-family="sans-serif" font-weight="bold">GS</text></svg>
+               GreatSchools
+             </a>`
+          : '';
+        const nicheBtn = urls.niche
+          ? `<a href="${urls.niche}" target="_blank" rel="noopener" class="school-link school-link--niche" title="Niche">
+               <svg viewBox="0 0 24 24" width="14" height="14"><circle cx="12" cy="12" r="12" fill="#3E54AC"/><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="9" font-family="sans-serif" font-weight="bold">N</text></svg>
+               Niche
+             </a>`
+          : '';
         return `
           <div class="school-item">
             <div class="school-icon ${iconBg}"><i class="fas ${icon}"></i></div>
             <div class="school-info">
               <strong>${s.name}</strong>
               <span>${s.grades} · ${s.district}</span>
+              ${gsBtn || nicheBtn ? `<div class="school-links">${gsBtn}${nicheBtn}</div>` : ''}
             </div>
             <div class="school-rating school-rating--${rClass}">${s.rating}/10</div>
           </div>`;
@@ -672,6 +772,18 @@ function setTrend(id, val) {
   el.classList.remove('trend-up','trend-down','trend-pos');
   if (val.startsWith('▼')) el.classList.add('trend-down');
   else if (val.startsWith('▲')) el.classList.add('trend-up');
+}
+
+function setScoreSm(id, score, label) {
+  const el = document.getElementById(id);
+  const labelEl = document.getElementById(id + '-label');
+  if (el) {
+    el.textContent = score ?? '—';
+    const hue = score >= 90 ? '#27ae60' : score >= 70 ? '#296886' : score >= 50 ? '#e67e22' : '#c0392b';
+    el.style.borderColor = hue;
+    el.style.color = hue;
+  }
+  if (labelEl && label) labelEl.textContent = label;
 }
 
 function setScore(id, score, label) {
